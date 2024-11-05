@@ -1,6 +1,0 @@
-.env
-__pycache__
-venv
-data
-.DS_Store
-agent/engines/prompt.txt

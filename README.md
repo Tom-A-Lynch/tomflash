@@ -1,37 +1,86 @@
-# nousflash
-hehe
-hehe 2 just cuz
+# tomflash-rs
 
-(small guest appearance by somewhere systems)
+hehe hehe
 
-### TODO:
+hehe hehe cubed
 
-- wallet actions: the agent need to be able to decide when to use the wallet for transfer of assets (how much and to which address), I’ve added functions in wallet_send.py for this, TODO: make the agent decide when/if send transactions from the address
+A Rust implementation of an autonomous AI agent that interacts on social media, manages cryptocurrency transactions, and maintains both short and long-term memory.
 
-- thinking about replies or subtweets to previous tweets: instead of news, I made the external data to be replies to the agent’s previous tweets and recent mentions of the agent on twitter, this may need yall to change the agent prompt to make it aware how to respond
+## Features
+
+- Autonomous social media interaction
+- ETH wallet management and transactions
+- Short-term and long-term memory systems
+- Vectorized memory storage and retrieval
+- Automated posting and interaction scheduling
+
+## Requirements
+
+- Rust 1.75+
+- PostgreSQL 15+
+- OpenAI API key
+- Twitter API credentials
+- Ethereum node access (Mainnet)
+
+## Configuration
+
+Copy `.env.example` to `.env` and configure:
 
 
-### basics:
+```
+env
+DATABASE_URL=postgres://user:pass@localhost/nousflash
+OPENAI_API_KEY=your_key
+TWITTER_API_KEY=your_key
+TWITTER_API_SECRET=your_secret
+TWITTER_ACCESS_TOKEN=your_token
+TWITTER_ACCESS_SECRET=your_secret
+ETH_MAINNET_RPC=your_rpc_url
+```
 
-DB folder has scripts to create and seed the database with some fake data. dokcer should automatically run all of this for you.
+## Running
 
-engines contains all the functions that generate the content for the agent pipeline.
+```
+bash
+Build and run
+cargo run --release
+Run with development settings
+cargo run
+Run tests
+cargo test
+```
 
-The pipeline.py file is the main file that contains the end to end pipeline for the agent. You can see the flow here.
+## Database
 
-**run_pipeline.py** is the main file that runs the pipeline. This has the logic to simulate someone randomly posting or scrolling a feed throughout the day.
-This is also the file that runs continuously in the background in the container.
+Uses Diesel ORM with PostgreSQL. Initialize the database:
 
-### Running the agent:
+```
+bash
+cargo install diesel_cli --no-default-features --features postgres
+diesel setup
+diesel migration run
+```
 
-docker-compose up -d
+## Architecture
 
-This will start the agent in the background and run continuously.
+The system consists of several key components:
 
-You can also run the agent manually by running:
+1. Memory Systems
+   - Short-term memory for recent interactions
+   - Long-term memory with vector embeddings
+   - Significance scoring for memory retention
 
-python run_pipeline.py
+2. Social Interaction
+   - Autonomous posting
+   - Reply generation
+   - Timeline analysis
 
-This will run the pipeline LOCALLY and not in the container.
+3. Wallet Management
+   - ETH transaction handling
+   - Balance monitoring
+   - Transaction decision making
 
-enjoy
+4. Pipeline System
+   - Scheduled activation periods
+   - Interaction frequency control
+   - State management
